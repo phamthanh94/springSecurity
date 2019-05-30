@@ -3,11 +3,11 @@ package com.example.demo.dao;
 import com.example.demo.Utils.WebUtils;
 import com.example.demo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -17,6 +17,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     private EntityManager em;
 
     @Override
+    @Cacheable(cacheNames = "cache.security.users", key = "#userName", unless = "#result == null")
     public User findUserByUserName(String userName) {
         StringBuilder sql = new StringBuilder();
         sql.append("Select * from User where user_name = :userName");
