@@ -15,8 +15,8 @@ public class TestController {
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal) {
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-        model.addAttribute("user",loginedUser);
+//        User loginedUser = (User) ((Authentication) principal).getPrincipal();
+//        model.addAttribute("user",loginedUser);
         return "adminPage";
     }
 

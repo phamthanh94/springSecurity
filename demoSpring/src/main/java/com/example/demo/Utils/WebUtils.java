@@ -9,10 +9,6 @@ public class WebUtils {
         return encoder.encode(params);
     }
 
-    public static void main(String[] args) {
-        String password = "2";
-        String encrytedPassword = encryte(password);
-        System.out.println("Encryted Password: " + encrytedPassword);
-    }
+
 
 }

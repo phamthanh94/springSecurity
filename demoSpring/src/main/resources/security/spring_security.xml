@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/security
+	                    http://www.springframework.org/schema/security/spring-security.xsd
+	                    http://www.springframework.org/schema/beans
+	                    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <security:http auto-config="true" use-expressions="true">
+        <security:intercept-url pattern="/login" access="permitAll()" />
+        <security:intercept-url pattern="/logout" access="permitAll()"/>
+        <security:intercept-url pattern="/signUpPage" access="permitAll()"/>
+        <security:intercept-url pattern="/userInfo" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+        <security:access-denied-handler error-page="/403"/>
+        <security:form-login login-page="/login"
+                             login-processing-url="/j_spring_security_check"
+                             default-target-url="/userInfo"
+                             authentication-failure-url="/login?error=true"
+                             password-parameter="password"
+                             username-parameter="username"/>
+        <security:logout logout-url="/logout" logout-success-url="/login"/>
+        <security:csrf disabled="true" />
+
+        <security:http-basic />
+
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider ref="defaultAuthenticationProvider" />
+    </security:authentication-manager>
+
+    <bean id="defaultAuthenticationProvider"
+          class="com.example.demo.config.DefaultAuthenticationProvider" />
+
+</beans>
