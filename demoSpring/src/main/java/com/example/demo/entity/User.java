@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "user_id")
     private Long id;
 
@@ -19,6 +19,28 @@ public class User {
 
     @Column(name = "status")
     private Short status;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "role_name")
+    private String roleName;
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Long getId() {
         return id;

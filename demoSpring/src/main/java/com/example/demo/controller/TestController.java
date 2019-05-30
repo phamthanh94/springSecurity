@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +12,7 @@ import java.security.Principal;
 @Controller
 public class TestController {
 
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String adminPage(Model model, Principal principal) {
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
@@ -22,7 +22,6 @@ public class TestController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(Model model) {
-
         return "loginPage";
     }
 
@@ -34,14 +33,6 @@ public class TestController {
 
     @RequestMapping(value = "/userInfo", method = RequestMethod.GET)
     public String userInfo(Model model, Principal principal) {
-
-        String userName = principal.getName();
-
-        System.out.println("User Name: " + userName);
-
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
-
         return "userInfoPage";
     }
 
@@ -49,12 +40,6 @@ public class TestController {
     public String accessDenied(Model model, Principal principal) {
 
         if (principal != null) {
-            User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
-//            String userInfo = WebUtils.toString(loginedUser);
-
-//            model.addAttribute("userInfo", userInfo);
-
             String message = "Hi " + principal.getName() //
                     + "<br> You do not have permission to access this page!";
             model.addAttribute("message", message);
@@ -64,16 +49,8 @@ public class TestController {
         return "403Page";
     }
 
-    public static String encrytePassword(String password) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        return encoder.encode(password);
+    @RequestMapping(value = "/signUpPage", method = RequestMethod.GET)
+    public String signPage(Model model) {
+        return "signUpPage";
     }
-
-    public static void main(String[] args) {
-        String password = "2";
-        String encrytedPassword = encrytePassword(password);
-
-        System.out.println("Encryted Password: " + encrytedPassword);
-    }
-
 }

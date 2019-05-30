@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -20,8 +21,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private RoleRepository roleRepository;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
@@ -29,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null){
             throw new UsernameNotFoundException("Not found :" + userName);
         }
-        List<String> listRole = roleRepository.getListRoleNameByUserId(user.getId());
+        List<String> listRole = Arrays.asList(user.getRoleName().split(","));
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         if (listRole != null && !listRole.isEmpty()){
             for (String role : listRole){
