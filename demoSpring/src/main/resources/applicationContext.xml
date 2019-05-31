@@ -6,11 +6,12 @@
 
     <import resource="classpath*:/security/spring_security.xml"/>
 
-    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">
-        <property name="cacheManager" ref="ehCache" />
-    </bean>
-
-    <bean id="ehCache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-        <property name="configLocation" value="file:/ehCache/ehcache.xml" />
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:message.properties</value>
+            </list>
+        </property>
     </bean>
 </beans>

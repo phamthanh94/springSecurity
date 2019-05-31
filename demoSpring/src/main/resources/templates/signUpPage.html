@@ -1,41 +1,48 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Login</title>
-</head>
 <body>
-<!-- Include _menu.html -->
-<th:block th:include="/menuPage"></th:block>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<h1>SignUp</h1>
-<h3>Enter user name and password:</h3>
-<form name='f' th:action="@{/signUp}" method='POST'>
-    <table>
-        <tr>
-            <td>User:</td>
-            <td><input type='text' name='username' value=''></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type='password' name='password' /></td>
-        </tr>
+<body>
 
-        <tr>
-            <td>Email:</td>
-            <td><input type='text' name='email' /></td>
-        </tr>
+<div id="signUp">
+    <h3 class="text-center text-white pt-5">Sign Up</h3>
+    <div class="container">
+        <div id="signUp-row" class="row justify-content-center align-items-center">
+            <div id="signUp-column" class="col-md-6">
+                <div id="signUp-box" class="col-md-12">
+                    <form id="signUp-form" class="form" action="/signUp" method="post">
+                        <h3 class="text-center text-info">Sign Up</h3>
+                        <div class="form-group">
+                            <label for="username" class="text-info">Username:</label><br>
+                            <input type="text" name="username" id="username" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="text-info">Password:</label><br>
+                            <input type="text" name="password" id="password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="text-info">Email:</label><br>
+                            <input type="text" name="email" id="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="role" class="text-info">Role:</label><br>
+                            <select class="browser-default custom-select" id="role" name="role">
+                                <option selected>--Select--</option>
+                                <option value="ROLE_ADMIN">ADMIN</option>
+                                <option value="ROLE_USER">USER</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" name="submit" class="btn btn-info btn-md" value="Sign Up">
+                        </div>
 
-        <tr>
-            <td>Role:</td>
-            <td><select name="role">
-                <option value="ROLE_ADMIN">ADMIN</option>
-                <option value="ROLE_USER">USER</option>
-            </select></td>
-        </tr>
-        <tr>
-            <td><input name="submit" type="submit" value="submit" /></td>
-        </tr>
-    </table>
-</form>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
-
 </html>

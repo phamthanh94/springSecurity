@@ -20,9 +20,9 @@
                              authentication-failure-url="/login?error=true"
                              password-parameter="password"
                              username-parameter="username"/>
-        <security:logout logout-url="/logout" logout-success-url="/login"/>
+        <security:logout logout-url="/logout" delete-cookies="JSESSIONID" logout-success-url="/login"/>
         <security:csrf disabled="true" />
-
+        <security:remember-me user-service-ref="userDetailsService" key="uniqueAndSecret" token-validity-seconds="100"/>
         <security:http-basic />
 
     </security:http>
@@ -34,4 +34,5 @@
     <bean id="defaultAuthenticationProvider"
           class="com.example.demo.config.DefaultAuthenticationProvider" />
 
+    <bean id="userDetailsService" class="com.example.demo.config.UserDetailsServiceImpl"/>
 </beans>
