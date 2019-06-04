@@ -60,8 +60,8 @@
         var socket = new SockJS('/webSocket');
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function(frame) {
-            stompClient.subscribe('topic/messages', function(payload) {
-                showMessageOutput(JSON.parse(payload.body));
+            stompClient.subscribe('topic/messages', function(data) {
+                showMessageOutput(JSON.parse(data.body));
             });
         });
     }

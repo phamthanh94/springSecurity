@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -20,7 +21,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     @Cacheable(cacheNames = "cache.security.users", key = "#userName", unless = "#result == null")
     public User findUserByUserName(String userName) {
         StringBuilder sql = new StringBuilder();
-        sql.append("Select * from User where user_name = :userName");
+        sql.append("Select * from customer where user_name = :userName");
         Query query = em.createNativeQuery(sql.toString());
         query.setParameter("userName",userName);
         List<Object[]> objects = query.getResultList();
@@ -42,7 +43,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     public void createUser(String username, String password, String email, String role) {
         StringBuilder sql = new StringBuilder();
         String pw = WebUtils.encryte(password);
-        sql.append("Insert into User (user_id,user_name,password,status,email,role_name)");
+        sql.append("Insert into customer (user_id,user_name,password,status,email,role_name)");
         sql.append(" Values (null,").append("'").append(username).append("'");
         sql.append(",").append("'").append(pw).append("'");
         sql.append(",").append("'").append(1).append("'");
