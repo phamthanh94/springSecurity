@@ -6,5 +6,5 @@ public interface UserRepositoryCustom {
 
      User findUserByUserName(String userName);
 
-     void createUser(String username, String password, String email, String role);
+     int createUser(String username, String password, String email, String role);
 }

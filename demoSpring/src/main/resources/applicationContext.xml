@@ -5,6 +5,7 @@
 
 
     <import resource="classpath*:/security/spring_security.xml"/>
+    <import resource="classpath*:/mongo/mongo_db.xml"/>
 
     <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
         <property name="ignoreUnresolvablePlaceholders" value="true"/>

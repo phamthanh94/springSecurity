@@ -40,7 +40,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     }
 
     @Override
-    public void createUser(String username, String password, String email, String role) {
+    public int createUser(String username, String password, String email, String role) {
         StringBuilder sql = new StringBuilder();
         String pw = WebUtils.encryte(password);
         sql.append("Insert into customer (user_id,user_name,password,status,email,role_name)");
@@ -51,6 +51,6 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
         sql.append(",").append("'").append(role).append("'");
         sql.append(")");
         Query query = em.createNativeQuery(sql.toString());
-        query.executeUpdate();
+       return query.executeUpdate();
     }
 }
